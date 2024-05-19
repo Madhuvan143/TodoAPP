@@ -1,0 +1,52 @@
+
+<div>
+    <div class="d-flex justify-content-center flex-column align-items-center">
+        <div class="d-flex justify-content-between my-4" style="width: 60%;">
+            <h1> To Dos</h1>
+            <button class="btn btn-outline-dark h-100" (click)="AddToDo()">+ Add To Do</button>
+        </div>
+        <div class="mb-5" style="width: 60%;">
+            <div>
+                <div class="border rounded-3 mt-3 d-flex align-items-center" *ngFor="let todo of todos">
+                    <div class="d-flex align-items-center p-4"><input type="checkbox" style="width: 20px; height: 20px;" [(ngModel)]="todo.isCompleted" (change)="updateTodo(todo.id, todo.isCompleted)"></div>
+                    <div class="w-100">{{todo.description}}</div>
+                    <span class="fa fa-trash-can p-1 cursor-pointer m-3" style="height: 20px;" (click)="deleteTodo(todo.id)"></span>
+                    <!-- <div class="text-secondary mt-2" style="font-size: 12px;" *ngIf="todo.isCompleted">
+                        Completed on {{formatDate(todo.completedOn)}}
+                    </div> -->
+                    <!-- <div class="text-secondary mt-2" style="font-size: 12px;" *ngIf="!todo.isCompleted">
+                        Last Updated on {{formatDate(todo.updatedOn)}}
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #addToDo>
+    <div class="d-flex justify-content-center flex-column align-items-center p-4">
+        <div class="d-flex flex-column  justify-content-between w-100">
+            <div class="d-flex justify-content-between">
+                <h2>Add To Do</h2>
+            </div>
+            <div class="d-flex flex-column">
+                <label>Description</label>
+                <textarea [(ngModel)]="description" class="rounded-3 p-2"></textarea>
+                <p class="text-danger" *ngIf="!description && isSubmitted">Description is required</p>
+            </div>
+            <div class="d-flex justify-content-end pt-4">
+                <button class="btn btn-outline-dark mr-2" (click)="closeModal()">Cancel</button>
+                <button class="btn btn-dark" (click)="createTodo()">Save</button>
+            </div>
+        </div>
+        <!-- Table content -->
+    </div>
+</ng-template>
+<ng-template #confirmationodal>
+    <div class="d-flex flex-column">
+        <div>Are you sure you want to delete?</div>
+        <div>
+			<button>cancel</button>
+			<button>delete</button>
+		</div>
+    </div>
+</ng-template>
